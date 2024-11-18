@@ -78,6 +78,11 @@ class UserController extends Controller
         return view('appl', $appl);
     }
 
+    public function admin_appl () {
+        $appl = ['appl' => Application::->latest()->get()];
+        return view('appl', $appl);
+    }
+
 
     public function reg (Request $request) {
         $validator = Validator::make($request->all(),
