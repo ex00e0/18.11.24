@@ -23,7 +23,7 @@
   </div>
   <div class="mb-3">
     <label for="exampleInputPassword1" class="form-label">Дата и время выполнения</label>
-    <input type="localtime" class="form-control" id="exampleInputPassword1" name="date_time">
+    <input type="datetime-local" class="form-control" id="exampleInputPassword1" name="date_time">
   </div>
   <div class="mb-3">
     <label for="exampleInputPassword1" class="form-label">Адрес</label>

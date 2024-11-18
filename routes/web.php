@@ -24,4 +24,6 @@ Route::get('/appl', [UserController::class, 'appl'])->name('appl');
 Route::get('/show_appl', [UserController::class, 'show_appl'])->name('show_appl');
 Route::post('/make_appl', [UserController::class, 'make_appl'])->name('make_appl');
 
-Route::group(['middleware'])
+// Route::group(['middleware' = ['auth', 'checkIsAdmin'] , 'prefix' = 'admin']) 
+
+// Route::get('/appl', [UserController::class, 'appl'])->name('appl');

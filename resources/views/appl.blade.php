@@ -2,6 +2,10 @@
 @section('title', 'Мои заявки')
 @section('content')
 
+@error('success') 
+<script>alert("{{$message}}");</script>
+@enderror
+<div class="container">
 @foreach($appl as $a)
 <div class="card" style="width: 18rem;">
   <div class="card-body">
@@ -13,4 +17,5 @@
   </div>
 </div>
 @endforeach
+</div>
 @endsection

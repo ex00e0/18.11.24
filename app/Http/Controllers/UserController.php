@@ -19,8 +19,29 @@ class UserController extends Controller
         return view('show_appl');
     }
 
-    public function make_appl () {
-        
+    public function make_appl (Request $request) {
+        $validator = Validator::make($request->all(),
+        [
+            "date_time" => ['required'],
+            "address" => ['required'],
+        ],
+        $messages = [
+            "date_time.required" => 'Не заполнено поле даты и времени',
+            "address.required" => 'Не заполнено поле адреса',
+        ]);
+
+        if ($validator->fails()) {
+            return back()->withErrors($validator);
+        }
+        else {
+            $user = Application::create([
+                "date_time" => $request->date_time,
+                "address" => $request->address,
+                "service_type" => $request->service_type,
+                "user_id" =>  Auth::user()->id,
+            ]);
+            return redirect()->route('appl')->withErrors(["success" => 'Заявка создана']);
+        }
     }
     public function index () {
         return view('index');
@@ -36,7 +57,12 @@ class UserController extends Controller
             $user = User::where('login', $request->login)->first();
             if (Hash::check($request->password, $user->password)) {
                 Auth::login(User::find($user->id));
-                return redirect()->route('appl');
+                if ($user->role == 'user') {
+                    return redirect()->route('appl');
+                }
+                else {
+                    return redirect()->route('admin/appl');
+                }
             } 
             else {
                 return back()->withErrors(["password"=>'Неверный пароль']);
